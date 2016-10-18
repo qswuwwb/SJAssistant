@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>班级信息</title>
+</head>
+<body>
+{% if class_list %}
+    <ul>
+        {% for class in class_list %}
+
+            <li><a href="{% url 'classInfo' class.id %}">{{ class.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>求查找到班级信息</p>
+{% endif %}
+
+
+
+</body>
+</html>
