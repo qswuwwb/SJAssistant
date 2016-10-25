@@ -4,7 +4,7 @@ class Attendance(models.Model):
     TYPE = (
         ('overtime_day', '加班一天'),
         ('overtime_night', '加班一晚'),
-        ('overtime_onduty', '值班一晚'),
+        ('overtime_onduty', '夜晚值班'),
         ('leave', '请假一天'),
     )
     class Meta:
