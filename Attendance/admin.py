@@ -1,9 +1,17 @@
 from django.contrib import admin
 from django.forms import ModelForm
+from suit.widgets import HTML5Input
 from .models import Attendance
 from StudentBasic.models import Assistant
 
+class AttendanceForm(ModelForm):
+    class Meta:
+        widgets = {
+            'date': HTML5Input(input_type='date')
+        }
+
 class AttendanceAdmin(admin.ModelAdmin):
+    form = AttendanceForm
     fields = ('date', 'type', 'reason')
     ordering = ('date',)
     list_display = ('assistant', 'date', 'type', 'reason')

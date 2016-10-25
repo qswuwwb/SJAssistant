@@ -7,7 +7,6 @@ from .models import Attendance
 from StudentBasic.models import Assistant
 from django.forms.models import formset_factory
 from django.contrib.auth.models import User
-from extra_views import ModelFormSetView, FormSetView
 from django.forms import ModelForm, TextInput, DateInput, SelectDateWidget, Select
 from django.forms.widgets import Input
 from crispy_forms.helper import FormHelper
