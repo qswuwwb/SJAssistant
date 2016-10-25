@@ -3,14 +3,14 @@ from django.http import HttpResponse, Http404
 from .models import ClassInfo, Student
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth import authenticate, login
 
 class IndexView(generic.ListView):
-    template_name = 'index.html'
+    template_name = 'Attendance/attendance_list.html'
     context_object_name = 'class_list'
 
     def get_queryset(self):
         return ClassInfo.objects.order_by('id')
-
 
 def classInfo(request, class_id):
     # try:
@@ -19,3 +19,5 @@ def classInfo(request, class_id):
     #     raise Http404("班级不存在")
     student_list = get_list_or_404(Student, class_info=class_id)
     return render(request, 'detail.html', {'student_list': student_list})
+
+

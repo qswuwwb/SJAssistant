@@ -31,9 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Attendance.apps.AttendanceConfig',
     'Interview.apps.InterviewConfig',
     'Conversation.apps.ConversationConfig',
     'StudentBasic.apps.StudentbasicConfig',
+    'suit',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,6 +75,35 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SJAssistant.wsgi.application'
 
+# suit
+SUIT_CONFIG = {
+    # header
+    'ADMIN_NAME': '龙岗教学部',
+    'HEADER_DATE_FORMAT': 'l, Y年 F j ',
+    # 'HEADER_TIME_FORMAT': 'H:i',
+
+    # forms
+    # 'SHOW_REQUIRED_ASTERISK': True,  # Default True
+    # 'CONFIRM_UNSAVED_CHANGES': True, # Default True
+
+    # menu
+    # 'SEARCH_URL': '/admin/auth/user/',
+    # 'MENU_ICONS': {
+    #    'sites': 'icon-leaf',
+    #    'auth': 'icon-lock',
+    # },
+    # 'MENU_OPEN_FIRST_CHILD': True, # Default True
+    # 'MENU_EXCLUDE': ('auth.group',),
+    # 'MENU': (
+    #     'sites',
+    #     {'app': 'auth', 'icon':'icon-lock', 'models': ('user', 'group')},
+    #     {'label': 'Settings', 'icon':'icon-cog', 'models': ('auth.user', 'auth.group')},
+    #     {'label': 'Support', 'icon':'icon-question-sign', 'url': '/support/'},
+    # ),
+
+    # misc
+    # 'LIST_PER_PAGE': 15
+}
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
@@ -128,3 +160,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/class/'
+APPEND_SLASH = False
