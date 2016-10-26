@@ -28,7 +28,7 @@ class Conversation(models.Model):
     operator = models.CharField("访谈人", choices=OPERATOR, max_length=10)
     student = models.ForeignKey(Student, verbose_name="学生", on_delete=models.CASCADE)
 
-    deportment_score = models.PositiveIntegerField("仪态", choices=RANK, help_text='哈哈，SB', default=1)
+    deportment_score = models.PositiveIntegerField("仪态", choices=RANK, default=1)
     deportment_problem = models.CharField("存在的问题", max_length=50, blank=True, default="")
 
     expression_score = models.PositiveIntegerField("表达", choices=RANK, default=1)
