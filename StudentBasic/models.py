@@ -7,12 +7,12 @@ GENDER = (
     )
 
 EDUCATION = (
-        ('junior', '初中及以下,我的爷啊'),
+        ('junior', '初中及以下'),
         ('high', '高中'),
         ('secondary', '中专'),
         ('college', '大专'),
         ('university', '本科'),
-        ('master', '硕士及以上，我的哥啊'),
+        ('master', '硕士及以上'),
 )
 
 
@@ -25,7 +25,7 @@ class Assistant(models.Model):
     phone_number = models.CharField("手机号", max_length=11, null=True)
     education = models.CharField("学历", max_length=10, choices=EDUCATION)
     graduated_school = models.CharField("毕业学校", max_length=20, null=True)
-    user = models.OneToOneField(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -37,6 +37,7 @@ class HeadTeacher(models.Model):
     name = models.CharField("姓名", max_length=10)
     entry_time = models.DateField("入职日期", null=True)
     phone_number = models.CharField("手机号", max_length=11, null=True)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name

@@ -3,6 +3,21 @@ from django.forms import ModelForm
 from suit.widgets import HTML5Input
 from .models import Attendance
 from StudentBasic.models import Assistant
+import datetime
+from django.core import serializers
+
+def lastWeekAttendance(modeladmin, request, queryset):
+    user = request.user
+    today = datetime.date
+    last_monday = today - datetime.timedelta(days=today.weekday())
+    last_week_attendance = Attendance.objects.filter(date__range=(last_monday, last_monday + datetime.timedelta(days=7)))
+    JSONSerializer = serializers.get_serializer("json")
+    json_serializer = JSONSerializer()
+    with open("/User/ysj/Desktop/lastWeekAttendance.json", "w") as out:
+        json_serializer.serialize(last_week_attendance, stream = out)
+
+
+lastWeekAttendance.short_description = "上周加班情况汇总"
 
 class AttendanceForm(ModelForm):
     class Meta:
@@ -13,6 +28,7 @@ class AttendanceForm(ModelForm):
 class AttendanceAdmin(admin.ModelAdmin):
     form = AttendanceForm
     fields = ('date', 'type', 'reason')
+    # actions = [lastWeekAttendance]
     ordering = ('date',)
     list_display = ('assistant', 'date', 'type', 'reason')
     # list_filter = ('assistant__name',)
