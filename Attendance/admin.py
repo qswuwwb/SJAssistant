@@ -12,7 +12,7 @@ def lastWeekAttendance(modeladmin, request, queryset):
     last_week_attendance = Attendance.objects.filter(date__range=(last_monday, last_monday + datetime.timedelta(days=6)))
     JSONSerializer = serializers.get_serializer("json")
     json_serializer = JSONSerializer()
-    with open("/User/ysj/Desktop/lastWeekAttendance.json", "w") as out:
+    with open("lastWeekAttendance.json", "w") as out:
         json_serializer.serialize(last_week_attendance, stream = out)
 
 lastWeekAttendance.short_description = "上周加班情况汇总"
