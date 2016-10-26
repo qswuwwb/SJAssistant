@@ -7,15 +7,13 @@ import datetime
 from django.core import serializers
 
 def lastWeekAttendance(modeladmin, request, queryset):
-    user = request.user
-    today = datetime.date
-    last_monday = today - datetime.timedelta(days=today.weekday())
-    last_week_attendance = Attendance.objects.filter(date__range=(last_monday, last_monday + datetime.timedelta(days=7)))
+    today = datetime.datetime.today()
+    last_monday = today - datetime.timedelta(days=today.weekday() + 7)
+    last_week_attendance = Attendance.objects.filter(date__range=(last_monday, last_monday + datetime.timedelta(days=6)))
     JSONSerializer = serializers.get_serializer("json")
     json_serializer = JSONSerializer()
     with open("/User/ysj/Desktop/lastWeekAttendance.json", "w") as out:
         json_serializer.serialize(last_week_attendance, stream = out)
-
 
 lastWeekAttendance.short_description = "上周加班情况汇总"
 
