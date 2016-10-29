@@ -18,11 +18,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
+def i18n_javascript(request):
+    return admin.site.i18n_javascript(request)
+
+
 urlpatterns = [
     url(r'^login', auth_views.login, name='login'),
     # url(r'^', include('django.contrib.auth.urls')),
     url(r'^attendance/', include('Attendance.urls'), name='attendance'),
     url(r'^class/', include('StudentBasic.urls')),
+    url(r'^chaining/', include('smart_selects.urls')),
+    url(r'^admin/jsi18n', i18n_javascript),
     url(r'^admin/', admin.site.urls),
 ]
 

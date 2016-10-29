@@ -1,0 +1,16 @@
+{% extends "base_site.html" %}
+
+{% block title %}
+新建学生信息
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+{#    {{ form.media }}#}
+{#    <form action="" method="post">{% csrf_token %}#}
+{#    {{ form | crispy }}#}
+{#        {% crispy student_create_form student_create_form.helper %}#}
+        {% crispy form %}
+        <p></p>
+{#    <input type="submit" class="btn btn-success" value="确认提交" />#}
+{#</form>#}
+{% endblock %}

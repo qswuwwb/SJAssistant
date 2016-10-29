@@ -13,7 +13,7 @@ class Attendance(models.Model):
 
     assistant = models.ForeignKey(Assistant, verbose_name="项目经理")
     type = models.CharField("加班/请假类型", choices=TYPE, max_length=20)
-    date = models.DateField("日期")
+    date = models.DateField("日期", unique=True)
     reason = models.CharField("加班原因", max_length=50)
     # weekAttendance = models.ForeignKey(WeekAttendance, verbose_name="周提交")
 
