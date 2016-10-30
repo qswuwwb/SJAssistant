@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse, Http404
 from .models import ClassInfo, Student
 from django.urls import reverse
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, TemplateView
 from django.contrib.auth import authenticate, login
 from django import forms
 from suit.widgets import SuitDateWidget
@@ -63,10 +63,17 @@ class StudentCreateForm(forms.ModelForm):
             # 'graduated_date': widgets.AdminDateWidget()
         }
 
+
 class StudentCreate(CreateView):
     template_name = "student_create.html"
-    def get_form(self, form_class=None):
-        # form = super(StudentCreate, self).get_form(form_class)
-        # form.fields['graduated_date'].widget.attrs.update({'class': 'datepicker'})
-        form = StudentCreateForm()
-        return form
+    form_class = StudentCreateForm
+    def get_success_url(self):
+        return reverse('createSuccess')
+    # def get_form(self, form_class=None):
+    #     # form = super(StudentCreate, self).get_form(form_class)
+    #     # form.fields['graduated_date'].widget.attrs.update({'class': 'datepicker'})
+    #     form = StudentCreateForm()
+    #     return form
+
+class StudentCreateSuccess(TemplateView):
+    template_name = 'student_create_success.html'

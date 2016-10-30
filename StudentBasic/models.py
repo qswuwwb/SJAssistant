@@ -80,11 +80,11 @@ class ClassInfo(models.Model):
         ('Java', 'Java')
     )
 
-    name = models.CharField("班级名", max_length=10)
-    product = models.CharField("产品线", max_length=4, choices=PRODUCT)
+    name = models.CharField("班级名", max_length=10, null=True)
+    product = models.CharField("产品线", max_length=4, choices=PRODUCT, null=True)
     assistant = models.ForeignKey(Assistant, verbose_name="项目经理", on_delete=models.CASCADE)
     head_teacher = models.ForeignKey(HeadTeacher, verbose_name="班主任", on_delete=models.CASCADE)
-    graduated_date = models.DateField("结课时间")
+    graduated_date = models.DateField("结课时间", null=True)
 
     def __str__(self):
         return self.name
@@ -116,15 +116,15 @@ class Student(models.Model):
     id_number_validator = validators.RegexValidator(regex=r'^\d{17}[\d,x,X]', message='请输入正确的身份证号')
     phone_number_validator = validators.RegexValidator(regex=r'^\d{11}', message='请输入正确的手机号')
 
-    name = models.CharField("姓名", max_length=10)
-    gender = models.CharField("性别", max_length=1, choices=GENDER)
-    id_number = models.CharField("身份证号", max_length=18, validators=[id_number_validator])
+    name = models.CharField("姓名", max_length=10, null=True)
+    gender = models.CharField("性别", max_length=1, choices=GENDER, null=True)
+    id_number = models.CharField("身份证号", max_length=18, validators=[id_number_validator], null=True)
 
-    phone_number = models.CharField("手机号", max_length=11, validators=[phone_number_validator])
-    qq_number = models.CharField("QQ号", max_length=20)
-    contact = models.CharField("紧急联系人", max_length=10)
-    contact_phone = models.CharField("紧急联系人手机号", max_length=20)
-    continent = models.ForeignKey(Continent, verbose_name="省")
+    phone_number = models.CharField("手机号", max_length=11, validators=[phone_number_validator], null=True)
+    qq_number = models.CharField("QQ号", max_length=20, null=True)
+    contact = models.CharField("紧急联系人", max_length=10, null=True)
+    contact_phone = models.CharField("紧急联系人手机号", max_length=20, null=True)
+    continent = models.ForeignKey(Continent, verbose_name="省", null=True)
     city = ChainedForeignKey(
         City,
         chained_field="continent",
@@ -135,14 +135,14 @@ class Student(models.Model):
     )
 
     graduated_school = models.CharField("毕业学校", max_length=20, null=True)
-    education = models.CharField("学历", max_length=10, choices=EDUCATION)
-    education_type = models.CharField("学历性质", max_length=1, choices=EDUCATION_TYPE)
-    cet_level = models.CharField("英语四六级", max_length=1, choices=CET_LEVEL)
-    discipline = models.CharField("专业", max_length=100, blank=True)
-    graduated_date = models.DateField("毕业时间", help_text='格式如2015-09-01')
+    education = models.CharField("学历", max_length=10, choices=EDUCATION, null=True)
+    education_type = models.CharField("学历性质", max_length=1, choices=EDUCATION_TYPE, null=True)
+    cet_level = models.CharField("英语四六级", max_length=1, choices=CET_LEVEL, null=True)
+    discipline = models.CharField("专业", max_length=100, blank=True, null=True)
+    graduated_date = models.DateField("毕业时间", help_text='格式如2015-09-01', null=True)
 
-    registration_center = models.CharField("报名中心", max_length=10, choices=CENTER)
-    class_info = models.ForeignKey(ClassInfo, verbose_name="班级", on_delete=models.CASCADE)
+    registration_center = models.CharField("报名中心", max_length=10, choices=CENTER, null=True)
+    class_info = models.ForeignKey(ClassInfo, verbose_name="班级", on_delete=models.CASCADE, null=True)
 
     # @classmethod
     def birthday(self):
