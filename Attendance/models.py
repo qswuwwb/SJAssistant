@@ -10,7 +10,7 @@ class Attendance(models.Model):
     class Meta:
         verbose_name = "加班与请假"
         verbose_name_plural = "加班与请假"
-
+ 
     assistant = models.ForeignKey(Assistant, verbose_name="项目经理", null=True)
     type = models.CharField("加班/请假类型", choices=TYPE, max_length=20, null=True)
     date = models.DateField("日期", null=True)
