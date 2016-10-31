@@ -31,11 +31,11 @@ class StudentResource(resources.ModelResource):
     qq_mail = fields.Field()
     class Meta:
         model = Student
-        fields = ('id', 'name', 'id_number', 'gender', 'age', 'native_place',
+        fields = ('id', 'name', 'id_number', 'phone_number', 'gender', 'age', 'native_place',
                   'qq_number', 'qq_mail', 'contact', 'contact_phone',
                   'education', 'education_type', 'graduated_school', 'discipline', 'graduated_date',
                   'cet_level', 'registration_center',)
-        export_order = ('id', 'name', 'native_place', 'gender', 'id_number', 'age',
+        export_order = ('id', 'name', 'native_place', 'gender', 'id_number', 'age', 'phone_number',
                   'qq_number', 'qq_mail', 'contact', 'contact_phone',
                   'education', 'education_type', 'graduated_school', 'discipline', 'graduated_date',
                   'cet_level', 'registration_center',)
