@@ -6,6 +6,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from import_export import resources, fields
 from import_export.admin import ImportExportModelAdmin
+from import_export.widgets import CharWidget
 import time
 from StudentBasic.models import GENDER, EDUCATION, EDUCATION_TYPE, CET_LEVEL, CENTER
 
@@ -42,8 +43,11 @@ class StudentResource(resources.ModelResource):
     def dehydrate_age(self, student):
         current_year = time.strftime('%Y', time.localtime())
         birth_year = student.birthday()[0:4]
-        print(current_year, birth_year)
         return  int(current_year) - int(birth_year)
+
+    def dehydrate_id_number(self, student):
+        print(student.id_number)
+        return "***%s" % (student.id_number)
 
     def dehydrate_native_place(self, student):
         return '%s%s' % (student.continent.name, student.city.name)
