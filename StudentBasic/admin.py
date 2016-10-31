@@ -47,7 +47,7 @@ class StudentResource(resources.ModelResource):
 
     def dehydrate_id_number(self, student):
         print(student.id_number)
-        return "A%s" % (student.id_number)
+        return "ABCDE%s" % (student.id_number)
 
     def dehydrate_native_place(self, student):
         return '%s%s' % (student.continent.name, student.city.name)
