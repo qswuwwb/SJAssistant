@@ -71,8 +71,16 @@ class SdutentExportAdmin(ImportExportModelAdmin):
     resource_class = StudentResource
     list_filter = ('class_info__name',)
 
+class ClassResource(resources.ModelResource):
+    class Meta:
+        model = ClassInfo
+        fields = ['id', 'name', 'product', 'assistant__name', 'is_graduate', 'student_count']
 
-admin.site.register(ClassInfo, ClassInfoAdmin)
+class ClassExportAdmin(ImportExportModelAdmin):
+    resource_class = ClassResource
+    list_filter = ('is_graduate',)
+
+admin.site.register(ClassInfo, ClassExportAdmin)
 admin.site.register(Student, SdutentExportAdmin)
 # admin.site.register(Student, StudentAdmin)
 admin.site.register(Assistant)

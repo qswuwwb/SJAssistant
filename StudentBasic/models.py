@@ -84,7 +84,9 @@ class ClassInfo(models.Model):
     product = models.CharField("产品线", max_length=4, choices=PRODUCT, null=True)
     assistant = models.ForeignKey(Assistant, verbose_name="项目经理", on_delete=models.CASCADE)
     head_teacher = models.ForeignKey(HeadTeacher, verbose_name="班主任", on_delete=models.CASCADE)
-    graduated_date = models.DateField("结课时间", null=True)
+    commencement_time = models.DateField("开课时间", null=True)
+    is_graduate = models.BooleanField("是否结课", default=False)
+    student_count = models.PositiveIntegerField("班级人数", null=True)
 
     def __str__(self):
         return self.name
