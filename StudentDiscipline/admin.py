@@ -12,18 +12,20 @@ class DisciplineAdmin(admin.ModelAdmin):
 
         obj.save()
 
-    def get_queryset(self, request):
-        qs = super(DisciplineAdmin, self).get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        else:
-            return qs.filter(operator__username = request.user)
+    # def get_queryset(self, request):
+    #     qs = super(DisciplineAdmin, self).get_queryset(request)
+    #     if request.user.is_superuser:
+    #         return qs
+    #     else:
+    #         return qs.filter(operator__username = request.user)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if not request.user.is_superuser:
             if db_field.name == 'studentdiscipline':
                 kwargs["queryset"] = StudentDiscipline.objects.filter(
-                    Q(student__class_info__assistant__username = request.user) | Q(student__class_info__head_teacher__username = request.user))
+                    Q(student__class_info__assistant__username = request.user) | Q(student__class_info__head_teacher__username = request.user)).filter(
+                    Q(student__class_info__is_graduate=False)
+                )
         else:
             kwargs["queryset"] = StudentDiscipline.objects.all()
         return super(DisciplineAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
