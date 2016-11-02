@@ -3,6 +3,7 @@ from StudentBasic.models import Student, Assistant
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.utils import timezone as timezone
 
 DISCIPLINE_TYPE = (
     ('absenteeism', '旷课'),
@@ -23,7 +24,7 @@ class StudentDiscipline(models.Model):
     # object_id = models = models.PositiveIntegerField()
     # operator = GenericForeignKey('content_type', 'object_id')
     operator = models.ForeignKey(User, verbose_name='操作人', null=True, editable=False)
-    add_date = models.DateTimeField(auto_now=True)
+    add_date = models.DateTimeField(editable=False, default=timezone.now)
     type = models.CharField('考勤违纪类型', max_length=20, choices=DISCIPLINE_TYPE, null=True)
     description = models.CharField('描述', max_length=50, null=True)
     student = models.ForeignKey(Student, verbose_name='学生', null=True)
