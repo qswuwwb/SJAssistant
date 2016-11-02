@@ -5,7 +5,7 @@ from .models import ClassInfo, Student, Assistant, HeadTeacher, City, Continent
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from import_export import resources, fields
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 from import_export.widgets import CharWidget
 import time
 from StudentBasic.models import GENDER, EDUCATION, EDUCATION_TYPE, CET_LEVEL, CENTER
@@ -76,7 +76,7 @@ class ClassResource(resources.ModelResource):
         model = ClassInfo
         fields = ['id', 'name', 'product', 'assistant__name', 'is_graduate', 'student_count']
 
-class ClassExportAdmin(ImportExportModelAdmin):
+class ClassExportAdmin(ExportActionModelAdmin):
     resource_class = ClassResource
     list_filter = ('is_graduate',)
 

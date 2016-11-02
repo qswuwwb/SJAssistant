@@ -75,9 +75,9 @@ class ClassInfo(models.Model):
         verbose_name_plural = "班级信息"
 
     PRODUCT = (
-        ('iOS', 'iOS'),
-        ('PHP', 'PHP'),
-        ('Java', 'Java')
+        ('ISD', 'iOS'),
+        ('PSD', 'PHP'),
+        ('JSD', 'Java')
     )
 
     name = models.CharField("班级名", max_length=10, null=True)
