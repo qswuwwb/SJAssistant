@@ -22,7 +22,7 @@ class StudentDiscipline(models.Model):
     # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     # object_id = models = models.PositiveIntegerField()
     # operator = GenericForeignKey('content_type', 'object_id')
-    operator = models.ForeignKey(User, verbose_name='操作人', null=True)
+    operator = models.ForeignKey(User, verbose_name='操作人', null=True, editable=False)
     add_date = models.DateTimeField(auto_now=True)
     type = models.CharField('考勤违纪类型', max_length=20, choices=DISCIPLINE_TYPE, null=True)
     description = models.CharField('描述', max_length=50, null=True)
