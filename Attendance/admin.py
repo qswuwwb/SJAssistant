@@ -77,7 +77,7 @@ class AttendanceAdmin(ExportActionModelAdmin):
     def get_queryset(self, request):
         qs = super(AttendanceAdmin, self).get_queryset(request)
         if request.user.is_superuser:
-            print(qs)
+            # print(qs)
             return qs
         else:
             user = request.user
