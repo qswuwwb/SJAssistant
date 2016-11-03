@@ -46,7 +46,6 @@ class StudentResource(resources.ModelResource):
         return  int(current_year) - int(birth_year)
 
     def dehydrate_id_number(self, student):
-        print(student.id_number)
         return "ABCDE%s" % (student.id_number)
 
     def dehydrate_native_place(self, student):
@@ -67,7 +66,7 @@ class StudentResource(resources.ModelResource):
     def dehydrate_registration_center(self, student):
         return next((v for (k,v) in CENTER if k==student.registration_center), None)
 
-class SdutentExportAdmin(ImportExportModelAdmin):
+class SdutentExportAdmin(ExportActionModelAdmin):
     resource_class = StudentResource
     list_filter = ('class_info__name',)
 
