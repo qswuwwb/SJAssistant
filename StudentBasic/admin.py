@@ -42,8 +42,11 @@ class StudentResource(resources.ModelResource):
 
     def dehydrate_age(self, student):
         current_year = time.strftime('%Y', time.localtime())
-        birth_year = student.birthday()[0:4]
-        return  int(current_year) - int(birth_year)
+        if student.birthday() == '未知':
+            return 0
+        else:
+            birth_year = student.birthday()[0:4]
+            return  int(current_year) - int(birth_year)
 
     def dehydrate_id_number(self, student):
         return "ABCDE%s" % (student.id_number)
