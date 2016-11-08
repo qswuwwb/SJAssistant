@@ -148,8 +148,11 @@ class Student(models.Model):
 
     # @classmethod
     def birthday(self):
-        birthday = time.strptime(self.id_number[6:14], '%Y%m%d')
-        return time.strftime('%Y年%m月%d日', birthday)
+        try:
+            birthday = time.strptime(self.id_number[6:14], '%Y%m%d')
+            return time.strftime('%Y年%m月%d日', birthday)
+        except:
+            return '未知'
     def __str__(self):
         return self.name
 
