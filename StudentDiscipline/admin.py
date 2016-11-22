@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import StudentDiscipline
+from StudentBasic.models import Student, Assistant, HeadTeacher
 from django.db.models import Q
 
 class DisciplineAdmin(admin.ModelAdmin):
@@ -21,13 +22,15 @@ class DisciplineAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if not request.user.is_superuser:
-            if db_field.name == 'studentdiscipline':
-                kwargs["queryset"] = StudentDiscipline.objects.filter(
-                    Q(student__class_info__assistant__username = request.user) | Q(student__class_info__head_teacher__username = request.user)).filter(
-                    Q(student__class_info__is_graduate=False)
+            if db_field.name == 'student':
+                assistant = Assistant.objects.filter(user__username=request.user)
+                head_teacher = HeadTeacher.objects.filter(user__username=request.user)
+                kwargs["queryset"] = Student.objects.filter(
+                    Q(class_info__assistant = assistant) | Q(class_info__head_teacher = head_teacher)).filter(
+                    Q(class_info__is_graduate=False)
                 )
         else:
-            kwargs["queryset"] = StudentDiscipline.objects.all()
+            kwargs["queryset"] = Student.objects.all()
         return super(DisciplineAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 admin.site.register(StudentDiscipline, DisciplineAdmin)

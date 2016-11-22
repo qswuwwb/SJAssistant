@@ -80,6 +80,7 @@ class ClassResource(resources.ModelResource):
 
 class ClassExportAdmin(ExportActionModelAdmin):
     resource_class = ClassResource
+    list_display = ('name', 'assistant', 'head_teacher', 'student_count')
     list_filter = ('is_graduate',)
 
 admin.site.register(ClassInfo, ClassExportAdmin)
